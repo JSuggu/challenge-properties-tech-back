@@ -4,6 +4,7 @@ import { UsersModule } from './modules/users/users.module';
 import { RolesModule } from './modules/roles/roles.module';
 import { PropertiesModule } from './modules/properties/properties.module';
 import { PropertyTypesModule } from './modules/property-types/property-types.module';
+import { PersonsModule } from './modules/persons/persons.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { PropertyTypesModule } from './modules/property-types/property-types.mod
     RolesModule,
     PropertiesModule,
     PropertyTypesModule,
+    PersonsModule,
   ],
   controllers: [],
   providers: [],
