@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './modules/users/users.module';
 import { RolesModule } from './modules/roles/roles.module';
+import { PropertiesModule } from './modules/properties/properties.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { RolesModule } from './modules/roles/roles.module';
     }),
     UsersModule,
     RolesModule,
+    PropertiesModule,
   ],
   controllers: [],
   providers: [],
