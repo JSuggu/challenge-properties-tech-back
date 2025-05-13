@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './modules/users/users.module';
 import { RolesModule } from './modules/roles/roles.module';
 import { PropertiesModule } from './modules/properties/properties.module';
+import { PropertyTypesModule } from './modules/property-types/property-types.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { PropertiesModule } from './modules/properties/properties.module';
     UsersModule,
     RolesModule,
     PropertiesModule,
+    PropertyTypesModule,
   ],
   controllers: [],
   providers: [],
