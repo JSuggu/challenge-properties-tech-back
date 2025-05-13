@@ -6,6 +6,7 @@ import { PropertiesModule } from './modules/properties/properties.module';
 import { PropertyTypesModule } from './modules/property-types/property-types.module';
 import { PersonsModule } from './modules/persons/persons.module';
 import { SalesModule } from './modules/sales/sales.module';
+import { AddressesModule } from './modules/addresses/addresses.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { SalesModule } from './modules/sales/sales.module';
     PropertyTypesModule,
     PersonsModule,
     SalesModule,
+    AddressesModule,
   ],
   controllers: [],
   providers: [],
