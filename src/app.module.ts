@@ -19,6 +19,7 @@ import { AddressesModule } from './modules/addresses/addresses.module';
       database: 'challenge_properties',
       autoLoadEntities: true,
       synchronize: true,
+      logging: true
     }),
     UsersModule,
     RolesModule,
