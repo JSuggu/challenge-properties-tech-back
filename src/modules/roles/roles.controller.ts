@@ -8,8 +8,8 @@ export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
 
   @Post()
-  create(@Body() createRoleDto: CreateRoleDto) {
-    return this.rolesService.create(createRoleDto);
+  create(@Body() createRoleRequest: CreateRoleDto) {
+    return this.rolesService.save(createRoleRequest);
   }
 
   @Get()
@@ -23,8 +23,8 @@ export class RolesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRoleDto: UpdateRoleDto) {
-    return this.rolesService.update(+id, updateRoleDto);
+  update(@Param('id') id: string, @Body() updateRoleRequest: UpdateRoleDto) {
+    return this.rolesService.update(+id, updateRoleRequest);
   }
 
   @Delete(':id')
