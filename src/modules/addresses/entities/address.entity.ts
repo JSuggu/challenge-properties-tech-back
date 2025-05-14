@@ -1,25 +1,33 @@
-import { Column, Entity } from "typeorm";
+import { Person } from "src/modules/persons/entities/person.entity";
+import { Property } from "src/modules/properties/entities/property.entity";
+import { Column, Entity, OneToOne } from "typeorm";
 
 @Entity()
 export class Address {
   @Column({primary: true, generated: true})
   id: number;
 
-  @Column()
+  @Column({nullable: true})
   country: string;
 
-  @Column()
+  @Column({nullable: true})
   state: string;
 
-  @Column()
+  @Column({nullable: true})
   city: string;
 
-  @Column()
+  @Column({nullable: true})
   street: string;
 
-  @Column()
+  @Column({nullable: true})
   number: string;
 
-  @Column()
+  @Column({nullable: true})
   zipCode: string;
+
+  @OneToOne(() => Property, (property) => property.address)
+  property: Property;
+
+  @OneToOne(() => Person, (person) => person.address)
+  person: Person;
 }
