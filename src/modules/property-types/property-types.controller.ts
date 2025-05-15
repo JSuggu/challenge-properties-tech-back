@@ -8,8 +8,8 @@ export class PropertyTypesController {
   constructor(private readonly propertyTypesService: PropertyTypesService) {}
 
   @Post()
-  create(@Body() createPropertyTypeDto: CreatePropertyTypeDto) {
-    return this.propertyTypesService.create(createPropertyTypeDto);
+  create(@Body() createPropertyRequest: CreatePropertyTypeDto) {
+    return this.propertyTypesService.create(createPropertyRequest);
   }
 
   @Get()
@@ -23,8 +23,8 @@ export class PropertyTypesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePropertyTypeDto: UpdatePropertyTypeDto) {
-    return this.propertyTypesService.update(+id, updatePropertyTypeDto);
+  update(@Param('id') id: string, @Body() updatePropertyRequest: UpdatePropertyTypeDto) {
+    return this.propertyTypesService.update(+id, updatePropertyRequest);
   }
 
   @Delete(':id')

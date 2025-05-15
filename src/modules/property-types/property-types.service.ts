@@ -1,26 +1,42 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePropertyTypeDto } from './dto/create-property-type.dto';
 import { UpdatePropertyTypeDto } from './dto/update-property-type.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { PropertyType } from './entities/property-type.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class PropertyTypesService {
-  create(createPropertyTypeDto: CreatePropertyTypeDto) {
-    return 'This action adds a new propertyType';
+
+  constructor(
+    @InjectRepository(PropertyType)
+    private readonly propertyTypeRepository: Repository<PropertyType>
+  ){}
+
+  async create(createPropertyTypeData: CreatePropertyTypeDto) {
+    const newPropertyType = this.propertyTypeRepository.create(createPropertyTypeData);
+    return await this.propertyTypeRepository.save(newPropertyType);
   }
 
-  findAll() {
-    return `This action returns all propertyTypes`;
+  async findAll() {
+    return await this.propertyTypeRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} propertyType`;
+  async findOne(propertyTypeId: number) {
+    const dbPropertyType = await this.propertyTypeRepository.findOneBy({id: propertyTypeId});
+    if(!dbPropertyType) throw new NotFoundException(`Tipo de propiedad con el ID ${propertyTypeId} no se ha encontrado`);
+    return dbPropertyType;
   }
 
-  update(id: number, updatePropertyTypeDto: UpdatePropertyTypeDto) {
-    return `This action updates a #${id} propertyType`;
+  async update(propertyTypeId: number, updatedPropertyTypeData: UpdatePropertyTypeDto) {
+    const result = await this.propertyTypeRepository.update(propertyTypeId, updatedPropertyTypeData);
+    if(result.affected === 0) throw new NotFoundException(`Tipo de propiedad con el ID ${propertyTypeId} no se ha encontrado`);
+    return this.findOne(propertyTypeId);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} propertyType`;
+  async remove(propertyTypeId: number) {
+    const result = await this.propertyTypeRepository.delete(propertyTypeId);
+    if(result.affected === 0) throw new NotFoundException(`Tipo de propiedad con el ID ${propertyTypeId} no se ha encontrado`);
+    return {messsage: 'El tipo de propiedad se ha eliminado correctamente'};
   }
 }
