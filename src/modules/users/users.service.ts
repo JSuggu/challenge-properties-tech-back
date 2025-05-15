@@ -5,7 +5,8 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Person } from '../persons/entities/person.entity';
-import { Role } from '../roles/entities/role.entity';
+import { RolesService } from '../roles/roles.service';
+import { Address } from '../addresses/entities/address.entity';
 
 @Injectable()
 export class UsersService {
@@ -13,15 +14,15 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository:Repository<User>,
-    @InjectRepository(Role)
-    private readonly roleRepository:Repository<Role>
+    private readonly roleService: RolesService
   ){}
 
   async save(userData: CreateUserDto) {
-    const dbRole = await this.roleRepository.findOneBy({id: userData.roleId});
+    const dbRole = await this.roleService.findOne(userData.roleId);
     if(!dbRole) throw new BadRequestException('El rol no existe');
 
     const newPerson = new Person();
+    newPerson.address = new Address();
     const newUser = this.userRepository.create({
       email: userData.email,
       password: userData.password,

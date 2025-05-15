@@ -20,7 +20,7 @@ export class Address {
   street: string;
 
   @Column({nullable: true})
-  number: string;
+  number: number;
 
   @Column({nullable: true})
   zipCode: string;
