@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { Repository } from 'typeorm';
@@ -23,14 +23,20 @@ export class RolesService {
   }
 
   async findOne(roleId: number) {
-    return await this.roleRepository.findOneBy({id: roleId});
+    const dbRole = await this.roleRepository.findOneBy({id: roleId});
+    if(!dbRole) throw new NotFoundException(`Rol con ID ${roleId} no encontrado`);
+    return dbRole;
   }
 
   async update(roleId: number, updatedRoleData: UpdateRoleDto) {
-    return this.roleRepository.update(roleId, updatedRoleData);
+    const result = await this.roleRepository.update(roleId, updatedRoleData);
+    if(result.affected === 0) throw new NotFoundException(`Rol con ID ${roleId} no encontrado`);
+    return await this.findOne(roleId);
   }
 
   async remove(roleId: number) {
-    return await this.roleRepository.delete(roleId);
+    const result = await this.roleRepository.delete(roleId);
+    if(result.affected === 0) throw new NotFoundException(`Rol con ID ${roleId} no encontrado`);
+    return { message: `Rol con ID ${roleId} eliminado correctamente` };
   }
 }
