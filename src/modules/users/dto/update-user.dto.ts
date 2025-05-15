@@ -5,8 +5,9 @@ import { IsEmail, IsNotEmpty, IsOptional, IsString, MinLength } from 'class-vali
 export class UpdateUserDto extends PartialType(CreateUserDto) {
     @IsEmail()
     @IsNotEmpty()
-    email: string;
-  
+    @IsOptional()
+    email?: string;
+
     @IsString()
     @IsOptional()
     @MinLength(8, {message: "La contraseña debe tener minimo 8 caracteres"})

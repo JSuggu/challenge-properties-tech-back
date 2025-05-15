@@ -17,7 +17,7 @@ export class UsersService {
     private readonly roleRepository:Repository<Role>
   ){}
 
-  async create(userData: CreateUserDto) {
+  async save(userData: CreateUserDto) {
     const dbRole = await this.roleRepository.findOneBy({id: userData.roleId});
     if(!dbRole) throw new BadRequestException('El rol no existe');
 

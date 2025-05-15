@@ -8,8 +8,8 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  save(@Body() createUserRequest: CreateUserDto) {
+    return this.usersService.save(createUserRequest);
   }
 
   @Get()
@@ -23,8 +23,8 @@ export class UsersController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
+  update(@Param('id') id: string, @Body() updateUserRequest: UpdateUserDto) {
+    return this.usersService.update(+id, updateUserRequest);
   }
 
   @Delete(':id')
