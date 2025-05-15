@@ -15,7 +15,7 @@ export class Person {
   lastname: string;
 
   @Column({nullable: true, unique: true})
-  dni: number;
+  dni: string;
 
   @OneToOne(() => User, (user) => user.id, {
     nullable: false

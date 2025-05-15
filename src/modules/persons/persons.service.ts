@@ -1,26 +1,36 @@
-import { Injectable } from '@nestjs/common';
-import { CreatePersonDto } from './dto/create-person.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { UpdatePersonDto } from './dto/update-person.dto';
+import { Repository } from 'typeorm';
+import { Person } from './entities/person.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class PersonsService {
-  create(createPersonDto: CreatePersonDto) {
-    return 'This action adds a new person';
+
+  constructor(
+    @InjectRepository(Person)
+    private readonly personRepository: Repository<Person>
+  ){}
+
+  async findAll() {
+    return this.personRepository.find();
   }
 
-  findAll() {
-    return `This action returns all persons`;
+  async findOne(personId: number) {
+    const dbPerson = await this.personRepository.findOneBy({id: personId})
+    if(!dbPerson) throw new NotFoundException(`La persona con ID ${personId} no se encontro`);
+    return dbPerson;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} person`;
+  async update(personId: number, updatedPersonData: UpdatePersonDto) {
+    const updatedPerson = await this.personRepository.update(personId, updatedPersonData);
+    if(updatedPerson.affected === 0) throw new NotFoundException(`La persona con ID ${personId} no se encontro`);
+    return this.findOne(personId);
   }
 
-  update(id: number, updatePersonDto: UpdatePersonDto) {
-    return `This action updates a #${id} person`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} person`;
+  async remove(personId: number) {
+    const deletedPerson = await this.personRepository.delete(personId);
+    if(deletedPerson.affected === 0) throw new NotFoundException(`La persona con ID ${personId} no se encontro`);
+    return {message: "La persona se ha borrado correctamente"};
   }
 }
