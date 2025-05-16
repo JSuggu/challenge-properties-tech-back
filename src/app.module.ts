@@ -7,6 +7,7 @@ import { PropertyTypesModule } from './modules/property-types/property-types.mod
 import { PersonsModule } from './modules/persons/persons.module';
 import { SalesModule } from './modules/sales/sales.module';
 import { AddressesModule } from './modules/addresses/addresses.module';
+import { AuthModule } from './core/auth/auth.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { AddressesModule } from './modules/addresses/addresses.module';
     PersonsModule,
     SalesModule,
     AddressesModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
