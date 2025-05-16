@@ -22,7 +22,6 @@ export class UpdateAddressDto{
   street?: string;
 
   @IsString()
-  @IsNotEmpty()
   @IsOptional()
   number?: number;
 

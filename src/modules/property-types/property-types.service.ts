@@ -13,7 +13,7 @@ export class PropertyTypesService {
     private readonly propertyTypeRepository: Repository<PropertyType>
   ){}
 
-  async create(createPropertyTypeData: CreatePropertyTypeDto) {
+  async save(createPropertyTypeData: CreatePropertyTypeDto) {
     const newPropertyType = this.propertyTypeRepository.create(createPropertyTypeData);
     return await this.propertyTypeRepository.save(newPropertyType);
   }

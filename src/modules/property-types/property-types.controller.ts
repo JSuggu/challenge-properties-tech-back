@@ -8,8 +8,8 @@ export class PropertyTypesController {
   constructor(private readonly propertyTypesService: PropertyTypesService) {}
 
   @Post()
-  create(@Body() createPropertyRequest: CreatePropertyTypeDto) {
-    return this.propertyTypesService.create(createPropertyRequest);
+  save(@Body() createPropertyRequest: CreatePropertyTypeDto) {
+    return this.propertyTypesService.save(createPropertyRequest);
   }
 
   @Get()
