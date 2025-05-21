@@ -4,9 +4,8 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
-import { Person } from '../persons/entities/person.entity';
 import { RolesService } from '../roles/roles.service';
-import { Address } from '../addresses/entities/address.entity';
+import { PersonsService } from '../persons/persons.service';
 
 @Injectable()
 export class UsersService {
@@ -14,15 +13,15 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository:Repository<User>,
-    private readonly roleService: RolesService
+    private readonly roleService: RolesService,
+    private readonly personService: PersonsService
   ){}
 
   async save(userData: CreateUserDto) {
     const dbRole = await this.roleService.findOne(userData.roleId);
     if(!dbRole) throw new BadRequestException('El rol no existe');
 
-    const newPerson = new Person();
-    newPerson.address = new Address();
+    const newPerson = await this.personService.generate();
     const newUser = this.userRepository.create({
       email: userData.email,
       password: userData.password,
@@ -40,6 +39,11 @@ export class UsersService {
   async findOne(userId: number) {
     const userDb = await this.userRepository.findOneBy({id: userId});
     if(!userDb) throw new NotFoundException(`El usuario con ID ${userId} no fue encontrado`);
+    return userDb;
+  }
+
+  async findByEmail(email: string) {
+    const userDb = await this.userRepository.findOneBy({email: email});
     return userDb;
   }
 

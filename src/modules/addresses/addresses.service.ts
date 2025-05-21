@@ -12,6 +12,11 @@ export class AddressesService {
     private readonly addressRepository: Repository<Address>
   ){}
 
+  async generate(){
+    const newAddress = this.addressRepository.create();
+    return await this.addressRepository.save(newAddress);
+  }
+
   async findAll() {
     return await this.addressRepository.find();
   }

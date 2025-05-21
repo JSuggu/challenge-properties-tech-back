@@ -3,14 +3,23 @@ import { UpdatePersonDto } from './dto/update-person.dto';
 import { Repository } from 'typeorm';
 import { Person } from './entities/person.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { AddressesService } from '../addresses/addresses.service';
 
 @Injectable()
 export class PersonsService {
 
   constructor(
     @InjectRepository(Person)
-    private readonly personRepository: Repository<Person>
+    private readonly personRepository: Repository<Person>,
+    private readonly addressService: AddressesService
   ){}
+
+  async generate(){
+    const newAddress = await this.addressService.generate();
+    const newPerson = this.personRepository.create();
+    newPerson.address = newAddress;
+    return this.personRepository.save(newPerson);
+  }
 
   async findAll() {
     return this.personRepository.find();

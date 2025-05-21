@@ -27,7 +27,8 @@ export class User {
   role: Role
 
   @OneToOne(() => Person, (person) => person.user,{
-    nullable: false
+    nullable: false,
+    eager: true
   })
   @JoinColumn()
   person: Person;
