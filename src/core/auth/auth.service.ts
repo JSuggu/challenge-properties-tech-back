@@ -20,7 +20,7 @@ export class AuthService {
     const samePassword = dbUser.password === defaultLoginData.password;
     if(!samePassword) throw new BadRequestException('Email o Contraseña incorrecta');
 
-    const token = this.sessionService.createSession(dbUser.id);
+    const token = this.sessionService.createSession(dbUser.id, dbUser.role.name);
 
     return {dbUser, token};
   }
@@ -34,7 +34,7 @@ export class AuthService {
 
     if(!dbUser){ dbUser = await this.userService.save({email: result.email, roleId: 2}) } 
 
-    const token = this.sessionService.createSession(dbUser.id);
+    const token = this.sessionService.createSession(dbUser.id, dbUser.role.name);
 
     return {dbUser, token};
   }

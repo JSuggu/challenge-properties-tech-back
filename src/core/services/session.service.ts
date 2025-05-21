@@ -3,16 +3,16 @@ import { randomBytes } from "crypto";
 
 @Injectable()
 export class SessionsService {
-  private activeSessions: Record<string, { userId: number; expiresAt: Date }>;
+  private activeSessions: Record<string, { userId: number; role: string, expiresAt: Date }>;
 
   constructor(){
     this.activeSessions = {};
   }
 
-  createSession(userId: number): string {
+  createSession(userId: number, role: string): string {
     const token = randomBytes(16).toString('hex');
     const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
-    this.activeSessions[token] = { userId, expiresAt };
+    this.activeSessions[token] = { userId, role, expiresAt };
     return token;
   }
 
