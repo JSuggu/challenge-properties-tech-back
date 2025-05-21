@@ -1,14 +1,16 @@
 import { BadGatewayException, BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { DefaultLoginDto } from './dto/default-login-dto';
 import { GoogleLoginDto } from './dto/google-login-dto';
-import { GoogleAuthService } from '../services/google-auth/google-auth.service';
+import { GoogleAuthService } from '../services/google-auth.service';
 import { UsersService } from 'src/modules/users/users.service';
+import { SessionsService } from '../services/session.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userService: UsersService,
-    private readonly googleAuthService: GoogleAuthService
+    private readonly googleAuthService: GoogleAuthService,
+    private readonly sessionService: SessionsService
   ){}
 
   async defaultLogin(defaultLoginData: DefaultLoginDto) {
@@ -18,7 +20,9 @@ export class AuthService {
     const samePassword = dbUser.password === defaultLoginData.password;
     if(!samePassword) throw new BadRequestException('Email o Contraseña incorrecta');
 
-    return dbUser;
+    const token = this.sessionService.createSession(dbUser.id);
+
+    return {dbUser, token};
   }
 
   async googleLogin(googleLoginData: GoogleLoginDto) {
@@ -26,10 +30,12 @@ export class AuthService {
 
     if(!result) throw new BadGatewayException('Hubo un Error con el Servicio de Google');
 
-    const dbUser = await this.userService.findByEmail(result.email);
+    let dbUser = await this.userService.findByEmail(result.email);
 
-    if(!dbUser) await this.userService.save({email: result.email, roleId: 2});
+    if(!dbUser){ dbUser = await this.userService.save({email: result.email, roleId: 2}) } 
 
-    return dbUser;
+    const token = this.sessionService.createSession(dbUser.id);
+
+    return {dbUser, token};
   }
 }

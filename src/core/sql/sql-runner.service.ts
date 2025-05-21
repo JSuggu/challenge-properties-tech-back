@@ -9,7 +9,7 @@ export class SqlRunnerService {
 
   async runSqlFile(){
     try {
-      const filePath = path.join(__dirname, '..', '..', '..', 'seeds', 'initial-data.sql');
+      const filePath = path.join(__dirname, '..', '..', 'seeds', 'initial-data.sql');
       const sql = fs.readFileSync(filePath, 'utf8');
       await this.dataSource.query(sql);
       return 'Datos cargados correctamente desde el archivo SQL.';
