@@ -1,26 +1,35 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { BadGatewayException, BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { DefaultLoginDto } from './dto/default-login-dto';
+import { GoogleLoginDto } from './dto/google-login-dto';
+import { GoogleAuthService } from '../services/google-auth/google-auth.service';
+import { UsersService } from 'src/modules/users/users.service';
 
 @Injectable()
 export class AuthService {
-  create(createAuthDto: CreateAuthDto) {
-    return 'This action adds a new auth';
+  constructor(
+    private readonly userService: UsersService,
+    private readonly googleAuthService: GoogleAuthService
+  ){}
+
+  async defaultLogin(defaultLoginData: DefaultLoginDto) {
+    const dbUser = await this.userService.findByEmail(defaultLoginData.email);
+    if(!dbUser) throw new NotFoundException('El usuario no existe');
+
+    const samePassword = dbUser.password === defaultLoginData.password;
+    if(!samePassword) throw new BadRequestException('Email o Contraseña incorrecta');
+
+    return dbUser;
   }
 
-  findAll() {
-    return `This action returns all auth`;
-  }
+  async googleLogin(googleLoginData: GoogleLoginDto) {
+    const result = await this.googleAuthService.verify(googleLoginData.googleToken);
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
+    if(!result) throw new BadGatewayException('Hubo un Error con el Servicio de Google');
 
-  update(id: number, updateAuthDto: UpdateAuthDto) {
-    return `This action updates a #${id} auth`;
-  }
+    const dbUser = await this.userService.findByEmail(result.email);
 
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
+    if(!dbUser) await this.userService.save({email: result.email, roleId: 2});
+
+    return dbUser;
   }
 }

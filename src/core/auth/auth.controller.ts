@@ -1,34 +1,28 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { DefaultLoginDto } from './dto/default-login-dto';
+import { GoogleLoginDto } from './dto/google-login-dto';
+import { SqlRunnerService } from '../services/sql/sql-runner.service';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly sqlService: SqlRunnerService
+  ) {}
 
-  @Post()
-  create(@Body() createAuthDto: CreateAuthDto) {
-    return this.authService.create(createAuthDto);
+  @Post('')
+  defaultLogin(@Body() loginDtoRequest: DefaultLoginDto) {
+    return this.authService.defaultLogin(loginDtoRequest);
   }
 
-  @Get()
-  findAll() {
-    return this.authService.findAll();
+  @Post('google')
+  googleLogin(@Body() loginDtoRequest: GoogleLoginDto) {
+    return this.authService.googleLogin(loginDtoRequest);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.authService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAuthDto: UpdateAuthDto) {
-    return this.authService.update(+id, updateAuthDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.authService.remove(+id);
+  @Post('init-data')
+  async initData(){
+    await this.sqlService.runSqlFile();
   }
 }
