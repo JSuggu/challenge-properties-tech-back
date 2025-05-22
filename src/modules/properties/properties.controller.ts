@@ -1,23 +1,31 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Req, BadRequestException } from '@nestjs/common';
 import { PropertiesService } from './properties.service';
 import { CreatePropertyDto } from './dto/create-property.dto';
 import { UpdatePropertyDto } from './dto/update-property.dto';
+import { Request } from 'express';
 
 @Controller('properties')
 export class PropertiesController {
   constructor(private readonly propertiesService: PropertiesService) {}
 
-  @Post()
-  save(@Body() createPropertyRequest: CreatePropertyDto) {
-    return this.propertiesService.save(createPropertyRequest);
+  @Post(':personId')
+  save(@Req() req: Request, @Body() createPropertyRequest: CreatePropertyDto) {
+    if(!req.user) throw new BadRequestException("No se encontro el usuario dentro del token");
+    return this.propertiesService.save(req.user.personId, createPropertyRequest);
   }
 
-  @Get()
-  findAll() {
-    return this.propertiesService.findAll();
+  @Get('public')
+  findAll(@Query() queryParams) {
+    return this.propertiesService.findAll(queryParams);
   }
 
-  @Get(':id')
+  @Get('admin')
+  findAllByAdmin(@Req() req: Request){
+    if(!req.user) throw new BadRequestException("No se encontro el usuario dentro del token");
+    return `return all properties from user with ID: ${req.user.personId}`;
+  }
+
+  @Get('public/:id')
   findOne(@Param('id') id: string) {
     return this.propertiesService.findOne(+id);
   }
