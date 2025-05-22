@@ -13,10 +13,10 @@ export class AuthMiddleware implements NestMiddleware {
     const token: string = authHeader.split(' ')[1];
     if (!token) throw new UnauthorizedException('Formato de token inválido');
 
-    const userId = this.sessionsService.validateSession(token);
-    if (!userId) throw new UnauthorizedException('Token inválido o expirado');
+    const result = this.sessionsService.validateSession(token);
+    if (!result) throw new UnauthorizedException('Token inválido o expirado');
 
-    (req as any).user = { id: userId };
+    (req as any).user = { ...result };
     next();
   }
 }
