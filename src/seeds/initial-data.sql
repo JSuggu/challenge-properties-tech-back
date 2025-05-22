@@ -1,10 +1,13 @@
-INSERT INTO public.role(
-	name)
-	VALUES ('ADMIN');
-	
-INSERT INTO public.role(
-	name)
-	VALUES ('CLIENT');
+INSERT INTO public.role (name) VALUES
+('DEVELOPER'),
+('ADMIN'),
+('CLIENT');
+
+INSERT INTO public.property_type (name) VALUES
+('house'),
+('appartment'),
+('complex'),
+('land');
 
 INSERT INTO public.address(
 	country, state, city, street, "number", "zipCode")
@@ -16,4 +19,228 @@ INSERT INTO public.person(
 
 INSERT INTO public."user"(
 	email, password, "accountLocked", "deleteAt", "roleId", "personId")
-	VALUES ('admin@gmail.com', 'admin1234', false, null, 1, 1);
+	VALUES ('admin@gmail.com', 'admin1234', false, null, 2, 1);
+
+-- ============ DIRECCIONES ÚNICAS (50) ============
+-- Argentina (30 direcciones únicas)
+INSERT INTO public.address (country, state, city, street, "number", "zipCode") VALUES
+('Argentina', 'Buenos Aires', 'Capital Federal', 'Av. Corrientes', 1234, 'C1043'),
+('Argentina', 'Buenos Aires', 'La Plata', 'Calle 7', 542, '1900'),
+('Argentina', 'Córdoba', 'Córdoba Capital', 'Av. Colón', 1200, 'X5000'),
+('Argentina', 'Santa Fe', 'Rosario', 'Pellegrini', 3200, 'S2000'),
+('Argentina', 'Mendoza', 'Mendoza', 'San Martín', 1233, 'M5500'),
+('Argentina', 'Buenos Aires', 'Mar del Plata', 'Av. Luro', 2233, 'B7600'),
+('Argentina', 'Tucumán', 'San Miguel de Tucumán', 'Muñecas', 443, 'T4000'),
+('Argentina', 'Salta', 'Salta Capital', 'Balcarce', 556, 'A4400'),
+('Argentina', 'Buenos Aires', 'Quilmes', 'Av. Mitre', 887, 'B1878'),
+('Argentina', 'Buenos Aires', 'Tigre', 'Paseo Victorica', 120, 'B1648'),
+('Argentina', 'Córdoba', 'Villa Carlos Paz', 'San Martín', 450, 'X5152'),
+('Argentina', 'Misiones', 'Posadas', 'Av. Uruguay', 1245, 'N3300'),
+('Argentina', 'Neuquén', 'Neuquén Capital', 'Av. Olascoaga', 123, 'Q8300'),
+('Argentina', 'Río Negro', 'Bariloche', 'Av. Bustillo', 24000, 'R8400'),
+('Argentina', 'Chubut', 'Trelew', 'Av. Fontana', 350, 'U9100'),
+('Argentina', 'Santa Cruz', 'Río Gallegos', 'Av. San Martín', 1255, 'Z9400'),
+('Argentina', 'Tierra del Fuego', 'Ushuaia', 'Maipú', 822, 'V9410'),
+('Argentina', 'Buenos Aires', 'San Isidro', 'Av. del Libertador', 16200, 'B1642'),
+('Argentina', 'Buenos Aires', 'Pilar', 'Pedro Lagrave', 123, 'B1629'),
+('Argentina', 'Buenos Aires', 'San Fernando', 'Av. Avellaneda', 1220, 'B1646'),
+('Argentina', 'Buenos Aires', 'Vicente López', 'Maipú', 1233, 'B1602'),
+('Argentina', 'Buenos Aires', 'Morón', 'Av. Rivadavia', 18000, 'B1708'),
+('Argentina', 'Buenos Aires', 'Lanús', '9 de Julio', 1233, 'B1824'),
+('Argentina', 'Buenos Aires', 'Avellaneda', 'Av. Mitre', 540, 'B1870'),
+('Argentina', 'Buenos Aires', 'Lomas de Zamora', 'Meeks', 1220, 'B1832'),
+('Argentina', 'Buenos Aires', 'Adrogué', 'Mitre', 1234, 'B1846'),
+('Argentina', 'Buenos Aires', 'Banfield', 'Alsina', 443, 'B1828'),
+('Argentina', 'Buenos Aires', 'Temperley', 'Av. Liniers', 1233, 'B1834'),
+('Argentina', 'Buenos Aires', 'Burzaco', 'Av. Espora', 1233, 'B1852'),
+('Argentina', 'Buenos Aires', 'Longchamps', 'Av. Eva Perón', 1233, 'B1854'),
+-- España (20 direcciones únicas)
+('España', 'Madrid', 'Madrid', 'Gran Vía', 45, '28013'),
+('España', 'Barcelona', 'Barcelona', 'Passeig de Gràcia', 120, '08008'),
+('España', 'Valencia', 'Valencia', 'Calle Colón', 22, '46004'),
+('España', 'Sevilla', 'Sevilla', 'Avenida de la Constitución', 12, '41001'),
+('España', 'Málaga', 'Málaga', 'Calle Larios', 5, '29005'),
+('España', 'Bilbao', 'Bilbao', 'Gran Vía', 40, '48001'),
+('España', 'Alicante', 'Alicante', 'Explanada de España', 1, '03002'),
+('España', 'Zaragoza', 'Zaragoza', 'Paseo Independencia', 25, '50001'),
+('España', 'Murcia', 'Murcia', 'Plaza Santo Domingo', 3, '30001'),
+('España', 'Palma', 'Palma de Mallorca', 'Paseo Marítimo', 12, '07014'),
+('España', 'Las Palmas', 'Las Palmas de Gran Canaria', 'Calle Mayor de Triana', 1, '35002'),
+('España', 'Vigo', 'Vigo', 'Calle Príncipe', 45, '36202'),
+('España', 'Gijón', 'Gijón', 'Calle Corrida', 21, '33201'),
+('España', 'L''Hospitalet', 'L''Hospitalet de Llobregat', 'Gran Via', 201, '08902'),
+('España', 'A Coruña', 'A Coruña', 'Calle Real', 45, '15003'),
+('España', 'Valladolid', 'Valladolid', 'Calle Santiago', 12, '47001'),
+('España', 'Córdoba', 'Córdoba', 'Cruz Conde', 22, '14003'),
+('España', 'Vitoria', 'Vitoria-Gasteiz', 'Calle Dato', 12, '01001'),
+('España', 'Oviedo', 'Oviedo', 'Calle Uría', 15, '33003'),
+('España', 'Santander', 'Santander', 'Calle Castelar', 12, '39004'),
+-- Argentina (25 direcciones repetidas para appartments)
+('Argentina', 'Buenos Aires', 'Capital Federal', 'Av. Santa Fe', 3255, 'C1425'),
+('Argentina', 'Buenos Aires', 'Capital Federal', 'Av. Santa Fe', 3255, 'C1425'),
+('Argentina', 'Buenos Aires', 'Capital Federal', 'Av. Santa Fe', 3255, 'C1425'),
+('Argentina', 'Buenos Aires', 'Capital Federal', 'Av. Santa Fe', 3255, 'C1425'),
+('Argentina', 'Buenos Aires', 'Capital Federal', 'Av. Santa Fe', 3255, 'C1425'),
+('Argentina', 'Buenos Aires', 'Capital Federal', 'Av. Libertador', 4980, 'C1428'),
+('Argentina', 'Buenos Aires', 'Capital Federal', 'Av. Libertador', 4980, 'C1428'),
+('Argentina', 'Buenos Aires', 'Capital Federal', 'Av. Libertador', 4980, 'C1428'),
+('Argentina', 'Buenos Aires', 'Capital Federal', 'Av. Libertador', 4980, 'C1428'),
+('Argentina', 'Buenos Aires', 'Capital Federal', 'Av. Libertador', 4980, 'C1428'),
+('Argentina', 'Buenos Aires', 'Capital Federal', 'Av. Cabildo', 2300, 'C1428'),
+('Argentina', 'Buenos Aires', 'Capital Federal', 'Av. Cabildo', 2300, 'C1428'),
+('Argentina', 'Buenos Aires', 'Capital Federal', 'Av. Cabildo', 2300, 'C1428'),
+('Argentina', 'Buenos Aires', 'Capital Federal', 'Av. Cabildo', 2300, 'C1428'),
+('Argentina', 'Buenos Aires', 'Capital Federal', 'Av. Cabildo', 2300, 'C1428'),
+('Argentina', 'Buenos Aires', 'La Plata', 'Calle 12', 887, '1900'),
+('Argentina', 'Buenos Aires', 'La Plata', 'Calle 12', 887, '1900'),
+('Argentina', 'Buenos Aires', 'La Plata', 'Calle 12', 887, '1900'),
+('Argentina', 'Buenos Aires', 'La Plata', 'Calle 12', 887, '1900'),
+('Argentina', 'Buenos Aires', 'La Plata', 'Calle 12', 887, '1900'),
+('Argentina', 'Córdoba', 'Córdoba Capital', 'Av. Vélez Sarsfield', 1255, 'X5000'),
+('Argentina', 'Córdoba', 'Córdoba Capital', 'Av. Vélez Sarsfield', 1255, 'X5000'),
+('Argentina', 'Córdoba', 'Córdoba Capital', 'Av. Vélez Sarsfield', 1255, 'X5000'),
+('Argentina', 'Córdoba', 'Córdoba Capital', 'Av. Vélez Sarsfield', 1255, 'X5000'),
+('Argentina', 'Córdoba', 'Córdoba Capital', 'Av. Vélez Sarsfield', 1255, 'X5000'),
+-- España (25 direcciones repetidas para appartments)
+('España', 'Madrid', 'Madrid', 'Paseo de la Castellana', 200, '28046'),
+('España', 'Madrid', 'Madrid', 'Paseo de la Castellana', 200, '28046'),
+('España', 'Madrid', 'Madrid', 'Paseo de la Castellana', 200, '28046'),
+('España', 'Madrid', 'Madrid', 'Paseo de la Castellana', 200, '28046'),
+('España', 'Madrid', 'Madrid', 'Paseo de la Castellana', 200, '28046'),
+('España', 'Barcelona', 'Barcelona', 'Avinguda Diagonal', 600, '08021'),
+('España', 'Barcelona', 'Barcelona', 'Avinguda Diagonal', 600, '08021'),
+('España', 'Barcelona', 'Barcelona', 'Avinguda Diagonal', 600, '08021'),
+('España', 'Barcelona', 'Barcelona', 'Avinguda Diagonal', 600, '08021'),
+('España', 'Barcelona', 'Barcelona', 'Avinguda Diagonal', 600, '08021'),
+('España', 'Valencia', 'Valencia', 'Avenida Francia', 55, '46023'),
+('España', 'Valencia', 'Valencia', 'Avenida Francia', 55, '46023'),
+('España', 'Valencia', 'Valencia', 'Avenida Francia', 55, '46023'),
+('España', 'Valencia', 'Valencia', 'Avenida Francia', 55, '46023'),
+('España', 'Valencia', 'Valencia', 'Avenida Francia', 55, '46023'),
+('España', 'Sevilla', 'Sevilla', 'Avenida de la Palmera', 12, '41013'),
+('España', 'Sevilla', 'Sevilla', 'Avenida de la Palmera', 12, '41013'),
+('España', 'Sevilla', 'Sevilla', 'Avenida de la Palmera', 12, '41013'),
+('España', 'Sevilla', 'Sevilla', 'Avenida de la Palmera', 12, '41013'),
+('España', 'Sevilla', 'Sevilla', 'Avenida de la Palmera', 12, '41013'),
+('España', 'Málaga', 'Málaga', 'Paseo Marítimo', 5, '29016'),
+('España', 'Málaga', 'Málaga', 'Paseo Marítimo', 5, '29016'),
+('España', 'Málaga', 'Málaga', 'Paseo Marítimo', 5, '29016'),
+('España', 'Málaga', 'Málaga', 'Paseo Marítimo', 5, '29016'),
+('España', 'Málaga', 'Málaga', 'Paseo Marítimo', 5, '29016');
+
+-- ============ COMPLEXES (14 con direcciones únicas) ============
+-- Argentina (4 complexes)
+
+INSERT INTO public.property (name, age, floors, rooms, baths, area, units, "isDisponible", price, "forSale", "forRent", "deleteAt", "propertyTypeId", "personId", "addressId") VALUES
+('Torre Santa Fe', 5, 15, 0, 0, 2500, 50, true, 2500000, true, false, null, 3, 1, 2),
+('Libertador Tower', 8, 20, 0, 0, 3000, 80, true, 3800000, true, false, null, 3, 1, 3),
+('Cabildo Residences', 3, 12, 0, 0, 1800, 40, true, 1900000, true, false, null, 3, 1, 4),
+('La Plata Suites', 6, 10, 0, 0, 1500, 30, true, 1600000, true, false, null, 3, 1, 5),
+-- España (5 complexes)
+('Torre Castellana', 6, 25, 0, 0, 3500, 100, true, 4200000, true, false, null, 3, 1, 32),
+('Diagonal 600', 4, 22, 0, 0, 3200, 90, true, 3900000, true, false, null, 3, 1, 33),
+('Francia Residences', 5, 18, 0, 0, 2800, 75, true, 3400000, true, false, null, 3, 1, 34),
+('Palmera Suites', 7, 15, 0, 0, 2400, 60, true, 2900000, true, false, null, 3, 1, 35),
+('Marítimo Tower', 3, 20, 0, 0, 3000, 85, true, 3600000, true, false, null, 3, 1, 36),
+-- ============ LANDS (6, todas en Argentina) ============
+('Terreno Nordelta', 0, 0, 0, 0, 500, 0, true, 350000, true, false, null, 4, 1, 6),
+('Loteo Pilar', 0, 0, 0, 0, 800, 0, true, 480000, true, false, null, 4, 1, 7),
+('Terreno Costa del Este', 0, 0, 0, 0, 650, 0, true, 420000, true, false, null, 4, 1, 8),
+('Loteo San Isidro', 0, 0, 0, 0, 450, 0, true, 320000, true, false, null, 4, 1, 9),
+('Terreno Mendoza', 0, 0, 0, 0, 1200, 0, true, 600000, true, false, null, 4, 1, 10),
+('Campo Córdoba', 0, 0, 0, 0, 5000, 0, true, 1500000, true, false, null, 4, 1, 11);
+
+-- ============ HOUSES (30) ============
+-- Argentina (20 houses con direcciones únicas)
+INSERT INTO public.property (name, age, floors, rooms, baths, area, units, "isDisponible", price, "forSale", "forRent", "deleteAt", "propertyTypeId", "personId", "addressId") VALUES
+('Casa Quilmes', 10, 2, 3, 2, 180, 1, true, 220000, true, false, null, 1, 1, 12),
+('Casa Tigre', 5, 1, 4, 3, 200, 1, true, 280000, true, false, null, 1, 1, 13),
+('Villa San Isidro', 15, 3, 5, 4, 350, 1, true, 550000, true, false, null, 1, 1, 14),
+('Chalet Nordelta', 8, 2, 4, 3, 280, 1, true, 450000, true, false, null, 1, 1, 15),
+('Residencia Pilar', 12, 2, 6, 4, 400, 1, true, 600000, true, false, null, 1, 1, 16),
+('Casa Patagonia', 20, 1, 3, 2, 220, 1, true, 320000, true, false, null, 1, 1, 17),
+('Hogar La Plata', 7, 2, 3, 2, 190, 1, true, 250000, true, false, null, 1, 1, 18),
+('Villa Mendoza', 9, 1, 4, 3, 240, 1, true, 380000, true, false, null, 1, 1, 19),
+('Casona Córdoba', 25, 2, 5, 3, 320, 1, true, 420000, true, false, null, 1, 1, 20),
+('Residencia Bariloche', 5, 2, 4, 3, 260, 1, true, 400000, true, false, null, 1, 1, 21),
+('Chalet Puerto Madero', 3, 3, 6, 4, 380, 1, true, 750000, true, false, null, 1, 1, 22),
+('Casa Belgrano', 18, 2, 3, 2, 210, 1, true, 290000, true, false, null, 1, 1, 23),
+('Villa Rosario', 10, 2, 4, 3, 270, 1, true, 350000, true, false, null, 1, 1, 24),
+('Hogar Mar del Plata', 6, 1, 3, 2, 180, 1, true, 230000, true, false, null, 1, 1, 25),
+('Casa Salta', 14, 1, 2, 1, 150, 1, true, 180000, true, false, null, 1, 1, 26),
+('Residencia Tucumán', 8, 2, 3, 2, 200, 1, true, 260000, true, false, null, 1, 1, 27),
+('Chalet Jujuy', 12, 1, 3, 2, 170, 1, true, 210000, true, false, null, 1, 1, 28),
+('Casona Misiones', 7, 1, 2, 1, 160, 1, true, 190000, true, false, null, 1, 1, 29),
+('Villa Neuquén', 5, 2, 3, 2, 220, 1, true, 300000, true, false, null, 1, 1, 30),
+('Casa Chubut', 9, 1, 2, 1, 140, 1, true, 170000, true, false, null, 1, 1, 31),
+-- España (15 houses con direcciones únicas)
+('Casa Madrid', 15, 3, 5, 4, 300, 1, true, 450000, true, false, null, 1, 1, 37),
+('Casa Barcelona', 8, 2, 4, 3, 250, 1, true, 380000, true, false, null, 1, 1, 38),
+('Villa Valencia', 12, 2, 4, 3, 280, 1, true, 420000, true, false, null, 1, 1, 39),
+('Chalet Sevilla', 10, 3, 5, 4, 320, 1, true, 480000, true, false, null, 1, 1, 40),
+('Residencia Málaga', 8, 2, 3, 2, 220, 1, true, 350000, true, false, null, 1, 1, 41),
+('Casona Bilbao', 18, 3, 4, 3, 290, 1, true, 400000, true, false, null, 1, 1, 42),
+('Hogar Alicante', 7, 2, 3, 2, 200, 1, true, 320000, true, false, null, 1, 1, 43),
+('Villa Zaragoza', 14, 2, 4, 3, 260, 1, true, 380000, true, false, null, 1, 1, 44),
+('Chalet Murcia', 9, 1, 3, 2, 180, 1, true, 280000, true, false, null, 1, 1, 45),
+('Casa Palma', 6, 2, 3, 2, 210, 1, true, 340000, true, false, null, 1, 1, 46),
+('Residencia Las Palmas', 11, 3, 4, 3, 310, 1, true, 460000, true, false, null, 1, 1, 47),
+('Villa Vigo', 13, 2, 3, 2, 230, 1, true, 360000, true, false, null, 1, 1, 48),
+('Casona Gijón', 20, 3, 5, 4, 350, 1, true, 520000, true, false, null, 1, 1, 49),
+('Chalet Valladolid', 8, 2, 3, 2, 190, 1, true, 300000, true, false, null, 1, 1, 50),
+('Hogar Santander', 5, 1, 2, 1, 150, 1, true, 240000, true, false, null, 1, 1, 51);
+
+-- ============ APARTMENTS (50) - Algunos comparten dirección ============
+-- Argentina (50 apartments)
+INSERT INTO public.property (name, age, floors, rooms, baths, area, units, "isDisponible", price, "forSale", "forRent", "deleteAt", "propertyTypeId", "personId", "addressId") VALUES
+('Depto 101 Torre Santa Fe', 5, 1, 2, 1, 80, 1, true, 120000, false, true, null, 2, 1, 52),
+('Depto 102 Torre Santa Fe', 5, 2, 3, 2, 110, 1, true, 180000, true, false, null, 2, 1, 53),
+('Depto 103 Torre Santa Fe', 5, 3, 1, 1, 60, 1, true, 90000, false, true, null, 2, 1, 54),
+('Depto 104 Torre Santa Fe', 5, 4, 2, 1, 85, 1, true, 125000, true, false, null, 2, 1, 55),
+('Depto 105 Torre Santa Fe', 5, 5, 3, 2, 120, 1, true, 190000, false, true, null, 2, 1, 56),
+('Depto 1A Libertador', 8, 1, 2, 1, 85, 1, true, 130000, true, false, null, 2, 1, 57),
+('Depto 2B Libertador', 8, 2, 3, 2, 115, 1, true, 195000, false, true, null, 2, 1, 58),
+('Depto 3C Libertador', 8, 3, 1, 1, 65, 1, true, 95000, true, false, null, 2, 1, 59),
+('Depto 4D Libertador', 8, 4, 2, 1, 90, 1, true, 140000, false, true, null, 2, 1, 60),
+('Depto 5E Libertador', 8, 5, 3, 2, 125, 1, true, 205000, true, false, null, 2, 1, 61),
+('Depto A1 Cabildo', 3, 1, 1, 1, 55, 1, true, 80000, false, true, null, 2, 1, 62),
+('Depto B2 Cabildo', 3, 2, 2, 1, 80, 1, true, 120000, true, false, null, 2, 1, 63),
+('Depto C3 Cabildo', 3, 3, 3, 2, 105, 1, true, 170000, false, true, null, 2, 1, 64),
+('Depto D4 Cabildo', 3, 4, 2, 2, 95, 1, true, 145000, true, false, null, 2, 1, 65),
+('Depto E5 Cabildo', 3, 5, 1, 1, 60, 1, true, 90000, false, true, null, 2, 1, 66),
+('Depto 201 Calle 12', 2, 1, 2, 1, 75, 1, true, 110000, true, false, null, 2, 1, 67),
+('Depto 202 Calle 12', 2, 1, 1, 1, 50, 1, true, 75000, false, true, null, 2, 1, 68),
+('Depto 203 Calle 12', 7, 2, 3, 2, 110, 1, true, 180000, false, true, null, 2, 1, 69),
+('Depto 204 Calle 12', 7, 2, 2, 1, 85, 1, true, 130000, true, false, null, 2, 1, 70),
+('Depto 305 Calle 12', 4, 3, 2, 1, 90, 1, true, 140000, false, true, null, 2, 1, 71),
+('Depto 301 Vélez', 4, 3, 1, 1, 60, 1, true, 95000, true, false, null, 2, 1, 72),
+('Depto 302 Vélez', 6, 4, 3, 2, 115, 1, true, 190000, true, false, null, 2, 1, 73),
+('Depto 402 Vélez', 6, 4, 2, 1, 80, 1, true, 125000, false, true, null, 2, 1, 74),
+('Depto 501 Vélez', 10, 5, 2, 2, 100, 1, true, 160000, false, true, null, 2, 1, 75),
+('Depto 502 Vélez', 10, 5, 1, 1, 65, 1, true, 100000, true, false, null, 2, 1, 76),
+-- España (25 apartments)
+('Piso 1A Castellana', 6, 1, 2, 1, 90, 1, true, 150000, true, false, null, 2, 1, 77),
+('Piso 2B Castellana', 6, 2, 3, 2, 120, 1, true, 220000, false, true, null, 2, 1, 78),
+('Piso 3C Castellana', 6, 3, 1, 1, 70, 1, true, 110000, true, false, null, 2, 1, 79),
+('Piso 4D Castellana', 6, 4, 2, 1, 95, 1, true, 160000, false, true, null, 2, 1, 80),
+('Piso 5E Castellana', 6, 5, 3, 2, 130, 1, true, 240000, true, false, null, 2, 1, 81),
+('Piso A1 Diagonal', 4, 1, 1, 1, 60, 1, true, 95000, false, true, null, 2, 1, 82),
+('Piso B2 Diagonal', 4, 2, 2, 1, 85, 1, true, 140000, true, false, null, 2, 1, 83),
+('Piso C3 Diagonal', 4, 3, 3, 2, 110, 1, true, 200000, false, true, null, 2, 1, 84),
+('Piso D4 Diagonal', 4, 4, 2, 2, 100, 1, true, 170000, true, false, null, 2, 1, 85),
+('Piso E5 Diagonal', 4, 5, 1, 1, 65, 1, true, 105000, false, true, null, 2, 1, 86),
+('Piso 101 Francia', 5, 1, 2, 1, 80, 1, true, 130000, true, false, null, 2, 1, 87),
+('Piso 102 Francia', 5, 1, 1, 1, 55, 1, true, 85000, false, true, null, 2, 1, 88),
+('Piso 103 Francia', 8, 4, 3, 2, 125, 1, true, 230000, false, true, null, 2, 1, 89),
+('Piso 104 Francia', 8, 4, 2, 1, 85, 1, true, 145000, true, false, null, 2, 1, 90),
+('Piso 105 Francia', 4, 5, 2, 2, 110, 1, true, 190000, true, false, null, 2, 1, 91),
+('Piso 201 Palmera', 7, 2, 3, 2, 115, 1, true, 195000, false, true, null, 2, 1, 92),
+('Piso 202 Palmera', 7, 2, 2, 1, 90, 1, true, 150000, true, false, null, 2, 1, 93),
+('Piso 203 Palmera', 8, 4, 2, 1, 85, 1, true, 145000, true, false, null, 2, 1, 94),
+('Piso 205 Palmera', 4, 5, 2, 2, 110, 1, true, 190000, true, false, null, 2, 1, 95),
+('Piso 204 Palmera', 4, 5, 1, 1, 75, 1, true, 120000, false, true, null, 2, 1, 96),
+('Piso 301 Marítimo', 3, 3, 2, 1, 95, 1, true, 160000, true, false, null, 2, 1, 97),
+('Piso 302 Marítimo', 3, 3, 1, 1, 70, 1, true, 115000, false, true, null, 2, 1, 98),
+('Piso 303 Marítimo', 8, 4, 2, 1, 85, 1, true, 145000, true, false, null, 2, 1, 99),
+('Piso 304 Marítimo', 4, 5, 2, 2, 110, 1, true, 190000, true, false, null, 2, 1, 100),
+('Piso 305 Marítimo', 4, 5, 1, 1, 75, 1, true, 120000, false, true, null, 2, 1, 101);
