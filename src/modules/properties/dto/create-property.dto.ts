@@ -7,6 +7,14 @@ export class CreatePropertyDto {
 
   @IsInt()
   @IsOptional()
+  age?: number;
+
+  @IsInt()
+  @IsOptional()
+  floors?: number
+
+  @IsInt()
+  @IsOptional()
   rooms?: number;
 
   @IsInt()
@@ -18,14 +26,20 @@ export class CreatePropertyDto {
 
   @IsInt()
   @IsOptional()
-  deparments?: number;
+  units?: number;
 
   @IsBoolean()
   isDisponible: boolean;
+
+  @IsBoolean()
+  forSale: boolean;
+
+  @IsBoolean()
+  forRent: boolean;
 
   @IsInt()
   price: number;
 
   @IsInt()
-  propertyId: number;
+  propertyTypeId: number;
 }

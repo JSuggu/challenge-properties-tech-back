@@ -1,4 +1,5 @@
 import { Address } from "src/modules/addresses/entities/address.entity";
+import { Property } from "src/modules/properties/entities/property.entity";
 import { Sale } from "src/modules/sales/entities/sale.entity";
 import { User } from "src/modules/users/entities/user.entity";
 import { Column, Entity, JoinColumn, OneToMany, OneToOne } from "typeorm";
@@ -30,6 +31,9 @@ export class Person {
   })
   @JoinColumn()
   address: Address;
+
+  @OneToMany(() => Property, (property) => property.person)
+  properties: Property[];
 
   @OneToMany(() => Sale, (sale) => sale.person)
   sales: Sale[];

@@ -1,4 +1,5 @@
 import { Address } from "src/modules/addresses/entities/address.entity";
+import { Person } from "src/modules/persons/entities/person.entity";
 import { PropertyType } from "src/modules/property-types/entities/property-type.entity";
 import { Sale } from "src/modules/sales/entities/sale.entity";
 import { Column, DeleteDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne } from "typeorm";
@@ -10,24 +11,36 @@ export class Property {
 
   @Column({unique: true})
   name: string;
-  
+
+  @Column({nullable: true})
+  age: number;
+
+  @Column({nullable: true})
+  floors: number
+
   @Column({nullable: true})
   rooms: number;
 
   @Column({nullable: true})
-  bath: number;
+  baths: number;
 
   @Column()
   area: number;
 
   @Column({nullable: true})
-  deparments: number;
+  units: number;
 
   @Column()
   isDisponible: boolean;
 
   @Column()
   price: number;
+
+  @Column({nullable: true})
+  forSale: boolean;
+
+  @Column({nullable: true})
+  forRent: boolean;
 
   @DeleteDateColumn()
   deleteAt: Date;
@@ -37,6 +50,11 @@ export class Property {
     eager: true
   })
   propertyType: PropertyType;
+
+  @ManyToOne(() => Person, (person) => person.properties, {
+    nullable: false
+  })
+  person: Person;
 
   @OneToOne(() => Address, (address) => address.property, {
     nullable: false,
