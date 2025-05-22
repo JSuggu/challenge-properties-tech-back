@@ -1,6 +1,6 @@
 import { Injectable, NestMiddleware, UnauthorizedException } from "@nestjs/common";
 import { SessionsService } from "../services/session.service";
-import { NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
@@ -16,7 +16,7 @@ export class AuthMiddleware implements NestMiddleware {
     const result = this.sessionsService.validateSession(token);
     if (!result) throw new UnauthorizedException('Token inválido o expirado');
 
-    (req as any).user = { ...result };
+    req.user = { ...result };
     next();
   }
 }
