@@ -15,9 +15,7 @@ export class PropertiesController {
   }
 
   @Get('public')
-  findAll(
-    @Query() queryParams, 
-  ){
+  findAll(@Query() queryParams ){
     return this.propertiesService.findAll(queryParams);
   }
 

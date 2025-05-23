@@ -31,7 +31,10 @@ export class PropertiesService {
       relations: ['propertyType', 'address']
     });
 
-    const finalResult: [] = this.searchFilter(result, queryParams.search);
+    let finalResult = result;
+    const search = queryParams.search;
+
+    if(search) finalResult = this.searchFilter(result, search);
 
     return {data: finalResult};
   }
@@ -75,7 +78,7 @@ export class PropertiesService {
   }
 
   private smartFilter(queryParams: any): any{
-    const {type, buyType, price} = queryParams;
+    const {type, buyType, price, rooms, baths, floors, minSurface, maxSurface, minAge, maxAge} = queryParams;
     let forSale, forRent;
 
     if(buyType === 'buy'){
@@ -102,6 +105,12 @@ export class PropertiesService {
       where.price = Between(prices[0], prices[1]);
     }
 
+    if(rooms) where.rooms = rooms;
+    if(baths) where.baths = baths;
+    if(floors) where.floors = floors;
+    if(minSurface && maxSurface) where.area = Between(minSurface, maxSurface);
+    if(minAge && maxAge) where.age = Between(minAge, maxAge);
+    
     return where;
   }
 
