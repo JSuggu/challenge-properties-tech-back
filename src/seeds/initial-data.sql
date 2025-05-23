@@ -130,7 +130,6 @@ INSERT INTO public.address (country, state, city, street, "number", "zipCode") V
 
 -- ============ COMPLEXES (14 con direcciones únicas) ============
 -- Argentina (4 complexes)
-
 INSERT INTO public.property (name, age, floors, rooms, baths, area, units, "isDisponible", price, "forSale", "forRent", "deleteAt", "propertyTypeId", "personId", "addressId") VALUES
 ('Torre Santa Fe', 5, 15, 0, 0, 2500, 50, true, 2500000, true, false, null, 3, 1, 2),
 ('Libertador Tower', 8, 20, 0, 0, 3000, 80, true, 3800000, true, false, null, 3, 1, 3),
@@ -244,3 +243,69 @@ INSERT INTO public.property (name, age, floors, rooms, baths, area, units, "isDi
 ('Piso 303 Marítimo', 8, 4, 2, 1, 85, 1, true, 145000, true, false, null, 2, 1, 99),
 ('Piso 304 Marítimo', 4, 5, 2, 2, 110, 1, true, 190000, true, false, null, 2, 1, 100),
 ('Piso 305 Marítimo', 4, 5, 1, 1, 75, 1, true, 120000, false, true, null, 2, 1, 101);
+
+-- ============ Nuevo usuario para asociarlo a las compras ============
+INSERT INTO public.address(
+	country, state, city, street, "number", "zipCode")
+	VALUES ('', '', '', '', 1114, '');
+
+INSERT INTO public.person(
+	name, lastname, dni, "addressId")
+	VALUES ('', '', '123', 102);
+
+INSERT INTO public."user"(
+	email, password, "accountLocked", "deleteAt", "roleId", "personId")
+	VALUES ('client@gmail.com', 'client1234', false, null, 3, 2);
+
+-- ============ Consultas para la tabla Sales ============
+INSERT INTO public.sale("saleType", "saleChannel", amount, "isPaid", "saleDate", "personId", "propertyId") VALUES
+('buy', 'website', 250000, true, '2023-01-15', 2, 16),
+('rent', 'social media', 1200, true, '2023-01-20', 2, 17),
+('buy', 'team member', 180000, false, '2023-02-05', 2, 18),
+('rent', 'digital marketing', 850, true, '2023-02-12', 2, 19),
+('buy', 'agents', 320000, true, '2023-02-18', 2, 20),
+('rent', 'others', 950, false, '2023-03-03', 2, 21),
+('buy', 'website', 275000, true, '2023-03-10', 2, 22),
+('rent', 'social media', 1100, true, '2023-03-22', 2, 23),
+('buy', 'team member', 195000, true, '2023-04-05', 2, 24),
+('rent', 'digital marketing', 780, false, '2023-04-15', 2, 25),
+('buy', 'agents', 290000, true, '2023-04-20', 2, 26),
+('rent', 'others', 1050, true, '2023-05-01', 2, 27),
+('buy', 'website', 310000, false, '2023-05-12', 2, 28),
+('rent', 'social media', 1250, true, '2023-05-18', 2, 29),
+('buy', 'team member', 225000, true, '2023-06-02', 2, 30),
+('rent', 'digital marketing', 900, true, '2023-06-10', 2, 31),
+('buy', 'agents', 335000, false, '2023-06-22', 2, 32),
+('rent', 'others', 1150, true, '2023-07-05', 2, 33),
+('buy', 'website', 265000, true, '2023-07-15', 2, 34),
+('rent', 'social media', 1300, false, '2023-07-20', 2, 35),
+('buy', 'team member', 205000, true, '2023-08-03', 2, 36),
+('rent', 'digital marketing', 820, true, '2023-08-12', 2, 37),
+('buy', 'agents', 350000, true, '2023-08-18', 2, 38),
+('rent', 'others', 980, false, '2023-09-01', 2, 39),
+('buy', 'website', 285000, true, '2023-09-10', 2, 40),
+('rent', 'social media', 1400, true, '2023-09-22', 2, 41),
+('buy', 'team member', 235000, false, '2023-10-05', 2, 42),
+('rent', 'digital marketing', 750, true, '2023-10-15', 2, 43),
+('buy', 'agents', 305000, true, '2023-10-20', 2, 44),
+('rent', 'others', 1250, true, '2023-11-01', 2, 45),
+('buy', 'website', 260000, false, '2023-11-12', 2, 46),
+('rent', 'social media', 1100, true, '2023-11-18', 2, 47),
+('buy', 'team member', 215000, true, '2023-12-02', 2, 48),
+('rent', 'digital marketing', 950, true, '2023-12-10', 2, 49),
+('buy', 'agents', 325000, false, '2023-12-22', 2, 50),
+('rent', 'others', 1350, true, '2024-01-05', 2, 51),
+('buy', 'website', 240000, true, '2024-01-15', 2, 52),
+('rent', 'social media', 1000, true, '2024-01-20', 2, 53),
+('buy', 'team member', 195000, false, '2024-02-05', 2, 54),
+('rent', 'digital marketing', 880, true, '2024-02-12', 2, 55),
+('buy', 'agents', 280000, true, '2024-02-18', 2, 56),
+('rent', 'others', 1150, false, '2024-03-03', 2, 57),
+('buy', 'website', 295000, true, '2024-03-10', 2, 58),
+('rent', 'social media', 1250, true, '2024-03-22', 2, 59),
+('buy', 'team member', 225000, true, '2024-04-05', 2, 60),
+('rent', 'digital marketing', 920, false, '2024-04-15', 2, 61),
+('buy', 'agents', 315000, true, '2024-04-20', 2, 62),
+('rent', 'others', 1400, true, '2024-05-01', 2, 63),
+('buy', 'website', 255000, true, '2024-05-12', 2, 64),
+('rent', 'social media', 1050, false, '2024-05-18', 2, 65);

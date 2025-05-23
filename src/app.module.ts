@@ -10,20 +10,26 @@ import { AddressesModule } from './modules/addresses/addresses.module';
 import { AuthModule } from './core/auth/auth.module';
 import { AuthMiddleware } from './core/middleware/auth.middleware';
 import { SqlModule } from './core/sql/sql.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: '41100',
-      database: 'challenge_properties',
-      autoLoadEntities: true,
-      synchronize: true,
-      logging: true
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        host: configService.get<string>('DB_HOST'),
+        port: configService.get<number>('DB_PORT'),
+        username: configService.get<string>('DB_USERNAME'),
+        password: configService.get<string>('DB_PASSWORD'),
+        database: configService.get<string>('DB_NAME'),
+        autoLoadEntities: true,
+        synchronize: true,
+      }),
     }),
+    ConfigModule,
     UsersModule,
     RolesModule,
     PropertiesModule,
