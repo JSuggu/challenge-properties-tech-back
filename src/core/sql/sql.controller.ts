@@ -5,7 +5,7 @@ import { SqlRunnerService } from '../sql/sql-runner.service';
 export class SqlController {
   constructor(private readonly sqlRunnerService: SqlRunnerService){}
 
-  @Post('init-data')
+  @Post('/public/init-data')
   async initData(){
     await this.sqlRunnerService.runSqlFile();
   }
