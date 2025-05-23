@@ -12,12 +12,12 @@ export class PropertyTypesController {
     return this.propertyTypesService.save(createPropertyRequest);
   }
 
-  @Get()
+  @Get('public')
   findAll() {
     return this.propertyTypesService.findAll();
   }
 
-  @Get(':id')
+  @Get('public/:id')
   findOne(@Param('id') id: string) {
     return this.propertyTypesService.findOne(+id);
   }

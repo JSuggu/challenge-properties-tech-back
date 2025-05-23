@@ -15,8 +15,15 @@ export class PropertiesController {
   }
 
   @Get('public')
-  findAll(@Query() queryParams) {
+  findAll(
+    @Query() queryParams, 
+  ){
     return this.propertiesService.findAll(queryParams);
+  }
+
+  @Get('public/home')
+  findAllToHome(@Query('type') type:string, @Query('page') page:number = 1, @Query('limit') limit:number = 16,){
+    return this.propertiesService.findAllToHome(type, page, limit);
   }
 
   @Get('admin')

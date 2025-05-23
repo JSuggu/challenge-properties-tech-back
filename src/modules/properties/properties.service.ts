@@ -31,9 +31,29 @@ export class PropertiesService {
       relations: ['propertyType', 'address']
     });
 
-    const finalResult = this.searchFilter(result, queryParams.search);
+    const finalResult: [] = this.searchFilter(result, queryParams.search);
 
-    return {result: finalResult};
+    return {data: finalResult};
+  }
+
+  async findAllToHome(type:string, page: number, limit:number){
+    const [results, total] = await this.propertyRepository.findAndCount({
+      where: {
+        propertyType: {name: type}
+      },
+      skip: (page - 1) * limit,
+      take: limit,
+      relations: ['propertyType', 'address']
+    });
+
+    return {
+      data: results,
+      meta: {
+        total,
+        page,
+        last_page: Math.ceil(total / limit)
+      }
+    }
   }
 
   async findOne(propertyId: number) {
